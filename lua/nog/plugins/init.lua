@@ -52,6 +52,7 @@ function M.setup()
 				vim.g.tokyonight_transparent = true
 				vim.g.tokyonight_italic_functions = true
         vim.cmd "colorscheme tokyonight"
+        vim.cmd "syntax on"
       end,
     }
 
@@ -151,16 +152,6 @@ function M.setup()
 			run = ":TSUpdate",
 			config = function()
 				require("nog.plugins.config.treesitter").setup()
-			end,
-		}
-
-		-- nvim-gps (show current scope in file)
-		use {
-			"SmiteshP/nvim-gps",
-			requires = "nvim-treesitter/nvim-treesitter",
-			module = "nvim-gps",
-			config = function()
-				require("nvim-gps").setup()
 			end,
 		}
 

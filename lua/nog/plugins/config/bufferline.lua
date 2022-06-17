@@ -3,7 +3,6 @@ local M = {}
 function M.setup()
   require("bufferline").setup {
     options = {
-      mode = "tabs",
       numbers = "none",
       diagnostics = "nvim_lsp",
       separator_style = "thick",

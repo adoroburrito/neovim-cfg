@@ -2,8 +2,6 @@ local api = vim.api
 local g = vim.g
 local opt = vim.opt
 
-vim.cmd [[syntax on]]
-
 -- Behaviors
 opt.belloff = "all" -- NO BELLS!
 opt.swapfile = false -- no swap files
