@@ -6,10 +6,10 @@ function M.setup()
 
   -- packer.nvim configuration
   local conf = {
-		profile = {
-			enable = true,
-			threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
-		},
+    profile = {
+      enable = true,
+      threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+    },
     display = {
       open_fn = function()
         return require("packer.util").float { border = "rounded" }
@@ -40,168 +40,125 @@ function M.setup()
   local function plugins(use)
     use { "wbthomason/packer.nvim" }
 
-		--
-		-- BEGIN!
-		--
+    --
+    -- BEGIN!
+    --
 
     -- Colorscheme
     use {
-      "folke/tokyonight.nvim",
+      "luisiacc/gruvbox-baby",
       config = function()
-				vim.g.tokyonight_style = "night"
-				vim.g.tokyonight_transparent = true
-				vim.g.tokyonight_italic_functions = true
-        vim.cmd "colorscheme tokyonight"
         vim.cmd "syntax on"
+        vim.g.gruvbox_baby_function_style = "italic"
+        vim.g.gruvbox_baby_keyword_style = "bold"
+        vim.cmd[[colorscheme gruvbox-baby]]
       end,
     }
 
-		-- IndentLine
-		use {
-			"lukas-reineke/indent-blankline.nvim",
-			event = "BufReadPre",
-			config = function()
-				require("nog.plugins.config.indentblankline").setup()
-			end,
-		}
+    -- Which key
+    use {
+      "folke/which-key.nvim",
+      config = function()
+        require("nog.plugins.config.whichkey").setup()
+      end,
+    }
 
-		-- Better icons
-		use {
-			"kyazdani42/nvim-web-devicons",
-			module = "nvim-web-devicons",
-			config = function()
-				require("nvim-web-devicons").setup { default = true }
-			end,
-		}
+    -- StatusLine
+    use {
+      "nvim-lualine/lualine.nvim",
+      event = "VimEnter",
+      config = function()
+        require("nog.plugins.config.lualine").setup()
+      end,
+      requires = { "kyazdani42/nvim-web-devicons" },
+    }
 
-		-- StatusLine
-		use {
-			"nvim-lualine/lualine.nvim",
-			event = "VimEnter",
-			config = function()
-			 require("nog.plugins.config.lualine").setup()
-			end,
-			requires = { "nvim-web-devicons" },
-		}
+    -- IndentLine
+    use {
+      "lukas-reineke/indent-blankline.nvim",
+      event = "BufReadPre",
+      config = function()
+        require("nog.plugins.config.indentblankline").setup()
+      end,
+    }
 
-		-- WhichKey
-		use {
-			 "folke/which-key.nvim",
-			 event = "VimEnter",
-			 config = function()
-				 require("nog.plugins.config.whichkey").setup()
-			 end,
-		}
+    -- File Explorer
+    use {
+      "kyazdani42/nvim-tree.lua",
+      requires = {
+        "kyazdani42/nvim-web-devicons",
+      },
+      cmd = { "NvimTreeToggle", "NvimTreeClose" },
+      config = function()
+        require("nog.plugins.config.nvimtree").setup()
+      end,
+    }
 
-		-- Easy hopping
-		use {
-			"phaazon/hop.nvim",
-			cmd = { "HopWord", "HopChar1" },
-			config = function()
-				require("hop").setup {}
-			end,
-		}
+    -- Tabline
+    use {
+      "nanozuki/tabby.nvim",
+      config = function() 
+        require("nog.plugins.config.tabby").setup() 
+      end,
+    }
 
-		-- File Explorer
-		use {
-		 "kyazdani42/nvim-tree.lua",
-		 requires = {
-			 "kyazdani42/nvim-web-devicons",
-		 },
-		 cmd = { "NvimTreeToggle", "NvimTreeClose" },
-			 config = function()
-				 require("nog.plugins.config.nvimtree").setup()
-			 end,
-		}
+    -- Treesitter
+    use {
+      "nvim-treesitter/nvim-treesitter",
+      run = ":TSUpdate",
+      config = function()
+        require("nog.plugins.config.treesitter").setup()
+      end
+    }
 
-		-- Fzf support
-		use { 'ibhagwan/fzf-lua',
-			-- optional for icon support
-			requires = { 'kyazdani42/nvim-web-devicons' }
-		}
+    -- Telescope
+    use {
+      'nvim-telescope/telescope.nvim',
+      requires = { {'nvim-lua/plenary.nvim'}, { "kyazdani42/nvim-web-devicons" } },
+      config = function()
+        require("nog.plugins.config.telescope").setup()
+      end
+    }
 
-		-- User interface
-		use {
-			"stevearc/dressing.nvim",
-			event = "BufEnter",
-			config = function()
-				require("dressing").setup {
-					select = {
-						backend = { "telescope", "fzf", "builtin" },
-					},
-				}
-			end,
-		}
-		use { "nvim-telescope/telescope.nvim", module = "telescope", as = "telescope" }
+    -- Notify
+    use "rcarriga/nvim-notify"
 
-		-- Buffer line
-		use {
-			"akinsho/nvim-bufferline.lua",
-			event = "BufReadPre",
-			wants = "nvim-web-devicons",
-			config = function()
-				require("nog.plugins.config.bufferline").setup()
-			end,
-		}
+    -- LSP configs
+    use "hrsh7th/cmp-buffer"
+    use "hrsh7th/cmp-path"
+    use "hrsh7th/cmp-nvim-lua"
+    use "ray-x/cmp-treesitter"
+    use "hrsh7th/cmp-cmdline"
+    use "saadparwaiz1/cmp_luasnip"
+    use "hrsh7th/cmp-nvim-lsp"
+    use "williamboman/nvim-lsp-installer"
+    use "ray-x/lsp_signature.nvim"
+    use "rafamadriz/friendly-snippets"
+    use {
+      "L3MON4D3/LuaSnip",
+      config = function()
+        require("nog.plugins.config.luasnip").setup()
+      end,
+    }
 
-		-- Treesitter
-		use {
-			"nvim-treesitter/nvim-treesitter",
-			opt = true,
-			event = "BufRead",
-			run = ":TSUpdate",
-			config = function()
-				require("nog.plugins.config.treesitter").setup()
-			end,
-		}
-
-    -- LSP
     use {
       "neovim/nvim-lspconfig",
       opt = true,
       event = "BufReadPre",
-      wants = { "cmp-nvim-lsp", "nvim-lsp-installer", "lsp_signature.nvim" },
       config = function()
         require("nog.plugins.config.lsp").setup()
       end,
-      requires = {
-        "williamboman/nvim-lsp-installer",
-        "ray-x/lsp_signature.nvim",
-      },
     }
-
-    -- nvim-cmp
     use {
       "hrsh7th/nvim-cmp",
-      event = "InsertEnter",
-      opt = true,
       config = function()
         require("nog.plugins.config.cmp").setup()
       end,
-      wants = { "LuaSnip" },
-      requires = {
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-nvim-lua",
-        "ray-x/cmp-treesitter",
-        "hrsh7th/cmp-cmdline",
-        "saadparwaiz1/cmp_luasnip",
-        "hrsh7th/cmp-nvim-lsp",
-        {
-          "L3MON4D3/LuaSnip",
-          wants = "friendly-snippets",
-          config = function()
-            require("nog.plugins.config.luasnip").setup()
-          end,
-        },
-        "rafamadriz/friendly-snippets",
-      },
-      disable = false,
     }
 
-		--
-		-- END!
-		--
+    --
+    -- END!
+    --
 
     if packer_bootstrap then
       print "Restart Neovim required after installation!"

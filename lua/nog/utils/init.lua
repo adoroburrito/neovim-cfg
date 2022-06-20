@@ -1,3 +1,5 @@
+local notify = require("notify")
+
 _G.dump = function(...)
   print(vim.inspect(...))
 end
@@ -23,15 +25,15 @@ function M.log(msg, hl, name)
 end
 
 function M.warn(msg, name)
-  vim.notify(msg, vim.log.levels.WARN, { title = name })
+  notify(msg, "warn", { title = name })
 end
 
 function M.error(msg, name)
-  vim.notify(msg, vim.log.levels.ERROR, { title = name })
+  notify(msg, "error", { title = name })
 end
 
 function M.info(msg, name)
-  vim.notify(msg, vim.log.levels.INFO, { title = name })
+  notify(msg, "info", { title = name })
 end
 
 return M

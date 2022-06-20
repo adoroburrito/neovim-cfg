@@ -22,6 +22,7 @@ function M.setup()
   local mappings = {
     ["w"] = { "<cmd>update!<CR>", "Save" },
     ["q"] = { "<cmd>q!<CR>", "Quit" },
+		["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 
     b = {
       name = "Buffer",
@@ -34,6 +35,18 @@ function M.setup()
       r = { "<Cmd>source $MYVIMRC<Cr>", "Re-source $MYVIMRC" },
     },
 
+    f = {
+      name = "Find (telescope)",
+      f = { "<cmd>Telescope git_files<cr>", "Files in CWD" },
+      F = { "<cmd>Telescope find_files<cr>", "All Files in CWD" },
+      g = { "<cmd>Telescope live_grep<cr>", "Grep file contents in CWD" },
+      b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+      c = { "<cmd>Telescope commands<cr>", "Commands" },
+      m = { "<cmd>Telescope man_pages<cr>", "Man pages" },
+      s = { "<cmd>Telescope lsp_document_symbols<cr>", "(LSP) Document symbols" },
+      g = { "<cmd>Telescope lsp_document_symbols<cr>", "(GIT) Status" },
+    },
+
     z = {
       name = "Packer",
       c = { "<cmd>PackerCompile<cr>", "Compile" },
@@ -41,25 +54,9 @@ function M.setup()
       s = { "<cmd>PackerSync<cr>", "Sync" },
       S = { "<cmd>PackerStatus<cr>", "Status" },
       u = { "<cmd>PackerUpdate<cr>", "Update" },
+      p = { "<cmd>PackerProfile<cr>", "Profile" },
     },
 
-		f = {
-			name = "Find",
-      f = {
-        name = "Files",
-        p = { "<cmd>FzfLua files<cr>", "In current path" },
-        h = { "<cmd>FzfLua oldfiles<cr>", "Opened files history" },
-        g = { "<cmd>FzfLua live_grep<cr>", "Live grep" },
-      },
-			b = {
-        name = "Buffers",
-        c = { "<cmd>FzfLua lgrep_curbuf<cr>", "In current buffer" },
-        n = { "<cmd>FzfLua buffers<cr>", "Buffer names" },
-      },
-			c = { "<cmd>FzfLua commands<cr>", "Commands" },
-			e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-			h = { "<cmd>HopWord<cr>", "Hop" },
-		},
   }
 
   whichkey.setup(conf)
