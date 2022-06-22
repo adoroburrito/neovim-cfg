@@ -155,6 +155,12 @@ function M.setup()
         require("nog.plugins.config.cmp").setup()
       end,
     }
+    use {
+      'goolord/alpha-nvim',
+      config = function ()
+        require'alpha'.setup(require'alpha.themes.dashboard'.config)
+      end
+    }
 
     --
     -- END!

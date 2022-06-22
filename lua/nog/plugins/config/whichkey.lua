@@ -57,6 +57,11 @@ function M.setup()
       p = { "<cmd>PackerProfile<cr>", "Profile" },
     },
 
+    n = {
+      name = "Nog utils",
+      t = { "<cmd>e ~/temp.md<cr>", "Temp (~/temp.md)" },
+    },
+
   }
 
   whichkey.setup(conf)
