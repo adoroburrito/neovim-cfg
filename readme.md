@@ -1,0 +1,1 @@
+![Editor screenshot](./sample.png)
