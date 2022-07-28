@@ -34,7 +34,7 @@ function M.setup()
       lualine_a = {
         "mode",
       },
-      lualine_b = { { "filename", path = 1} },
+      lualine_b = { { "filename", path = 2} },
       lualine_c = {
         {
           "lsp_progress",
