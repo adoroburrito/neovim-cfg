@@ -67,3 +67,5 @@ vim.cmd [[
   augroup end
 ]]
 
+vim.opt.guifont = { "FantasqueSansMono Nerd Font Mono", "h12" }
+

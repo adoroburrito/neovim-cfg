@@ -21,7 +21,6 @@ function M.setup()
 
   local mappings = {
     ["w"] = { "<cmd>update!<CR>", "Save" },
-    ["q"] = { "<cmd>q!<CR>", "Quit" },
 		["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 
     b = {
@@ -47,6 +46,21 @@ function M.setup()
       g = { "<cmd>Telescope lsp_document_symbols<cr>", "(GIT) Status" },
     },
 
+    F = {
+      name = "(cd to) Useful folders",
+      c = { "<cmd>cd ~/.config/nvim<cr><cmd>NvimTreeOpen ~/.config/nvim<cr>", "Config folder" },
+      p = { "<cmd>cd ~/fun<cr><cmd>NvimTreeOpen ~/fun<cr>", "Project folder" },
+      d = { "<cmd>cd ~/Downloads<cr><cmd>NvimTreeOpen ~/Downloads/<cr>", "Downloads folder" },
+      h = { "<cmd>cd ~/<cr><cmd>NvimTreeOpen ~/<cr>", "Home folder" },
+      w = { "<cmd>cd ~/work<cr><cmd>NvimTreeOpen ~/work<cr>", "Work folder" },
+    },
+
+    q = {
+      name = "Quick edit",
+      c = { "<cmd>e ~/.config/nvim/lua/nog/plugins/init.lua<cr>", "Plugins config" },
+      w = { "<cmd>e ~/.config/nvim/lua/nog/plugins/config/whichkey.lua<cr>", "Whichkey config" },
+    },
+
     z = {
       name = "Packer",
       c = { "<cmd>PackerCompile<cr>", "Compile" },
@@ -60,6 +74,9 @@ function M.setup()
     n = {
       name = "Nog utils",
       t = { "<cmd>e ~/temp.md<cr>", "Temp (~/temp.md)" },
+      g = { "<cmd>cd %:h | cd `git rev-parse --show-toplevel`<cr><cmd>execute 'NvimTreeOpen' getcwd()<cr>", "Set CWD as this file's git root" },
+      r = { "<cmd>luafile ~/.config/nvim/init.lua<cr>", "Reload cfg" },
+      n = { "<cmd>require('notify')('Notify!')<cr>", "Notify test" },
     },
 
   }

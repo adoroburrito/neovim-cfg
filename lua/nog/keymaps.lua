@@ -29,3 +29,32 @@ keymap("n", "<ESC>", ":nohlsearch<Bar>:echo<CR>", default_opts)
 -- Move selected line / block of text in visual mode
 keymap("x", "K", ":move '<-2<CR>gv-gv", default_opts)
 keymap("x", "J", ":move '>+1<CR>gv-gv", default_opts)
+
+vim.g.gui_font_default_size = 16
+vim.g.gui_font_size = vim.g.gui_font_default_size
+vim.g.gui_font_face = "FantasqueSansMono Nerd Font Mono"
+
+RefreshGuiFont = function()
+  vim.opt.guifont = string.format("%s:h%s",vim.g.gui_font_face, vim.g.gui_font_size)
+end
+
+ResizeGuiFont = function(delta)
+  vim.g.gui_font_size = vim.g.gui_font_size + delta
+  RefreshGuiFont()
+end
+
+ResetGuiFont = function ()
+  vim.g.gui_font_size = vim.g.gui_font_default_size
+  RefreshGuiFont()
+end
+
+-- Call function on startup to set default value
+ResetGuiFont()
+
+-- Keymaps
+keymap("n", "<C-+>", ":luado ResizeGuiFont(1)<CR>", default_opts)
+keymap("n", "<C-->", ":luado ResizeGuiFont(-1)<CR>", default_opts)
+keymap("n", "<C-BS>", ":luado ResizeGuiFont()<CR>", default_opts)
+keymap("i", "<C-+>", ":luado ResizeGuiFont(1)<CR>", default_opts)
+keymap("i", "<C-->", ":luado ResizeGuiFont(-1)<CR>", default_opts)
+keymap("i", "<C-BS>", ":luado ResizeGuiFont()<CR>", default_opts)

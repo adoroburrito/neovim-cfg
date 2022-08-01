@@ -10,6 +10,7 @@ local servers = {
   vimls = {},
   omnisharp = {},
   yamlls = {},
+  gopls = {},
 }
 
 local lsp_signature = require "lsp_signature"

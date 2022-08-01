@@ -51,7 +51,25 @@ function M.setup()
         vim.cmd "syntax on"
         vim.g.gruvbox_baby_function_style = "italic"
         vim.g.gruvbox_baby_keyword_style = "bold"
-        vim.cmd[[colorscheme gruvbox-baby]]
+        -- vim.cmd[[colorscheme gruvbox-baby]]
+      end,
+    }
+
+    use {
+      "navarasu/onedark.nvim",
+      config = function()
+        vim.o.background='light'
+        require('onedark').setup {
+          style = 'light',
+          code_style = {
+            comments = 'italic',
+            keywords = 'bold',
+            functions = 'none',
+            strings = 'italic',
+            variables = 'none'
+          },
+        }
+        require('onedark').load()
       end,
     }
 

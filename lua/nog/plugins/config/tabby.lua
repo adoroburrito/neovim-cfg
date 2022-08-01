@@ -3,7 +3,20 @@ local M = {}
 function M.setup()
   local tabby = require "tabby"
   local util = require('tabby.util')
-  local colors = require('gruvbox-baby.colors').config()
+  local gruvcolors = require('gruvbox-baby.colors').config()
+  local onedarkpallete = require("onedark.palette")
+  local targetcolors = {
+    gruvbox = {
+      highlight = gruvcolors.light_blue,
+      lowlight = gruvcolors.dark,
+      bright = gruvcolors.bg_light,
+    },
+    onelight = {
+      highlight = onedarkpallete.light.bg_blue,
+      lowlight = onedarkpallete.light.bg_d,
+      bright = onedarkpallete.light.bg0,
+    },
+  }
 
   local hl_tabline = util.extract_nvim_hl('TabLine')
   local hl_tabline_sel = util.extract_nvim_hl('TabLineSel')
@@ -21,13 +34,13 @@ function M.setup()
       hl = 'TabLineFill',
       layout = 'tab_only',
       head = {
-        { '  ', hl = { fg = colors.light_blue, bg = colors.dark } },
+        { '  ', hl = { fg = targetcolors.onelight.highlight, bg = targetcolors.lowlight } },
       },
       active_tab = {
         label = function(tabid)
           return {
             tab_label(tabid, true),
-            hl = { fg = colors.dark, bg = colors.light_blue, style = 'bold' },
+            hl = { fg = targetcolors.onelight.bright, bg = targetcolors.onelight.highlight, style = 'bold' },
           }
         end,
         left_sep = { '', hl = { fg = hl_tabline_sel.bg, bg = hl_tabline_fill.bg } },
@@ -37,7 +50,7 @@ function M.setup()
         label = function(tabid)
           return {
             tab_label(tabid, false),
-            hl = { fg = colors.bg_light, bg = colors.dark, style = nil },
+            hl = { fg = targetcolors.onelight.lowlight, bg = targetcolors.onelight.bright, style = nil },
           }
         end,
         left_sep = { '', hl = { fg = hl_tabline.bg, bg = hl_tabline_fill.bg } },
