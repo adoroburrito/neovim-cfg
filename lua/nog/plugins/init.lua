@@ -72,6 +72,15 @@ function M.setup()
         require('onedark').load()
       end,
     }
+    
+    use {
+      "ayu-theme/ayu-vim",
+      config = function()
+        vim.cmd[[set termguicolors]]
+        vim.cmd[[let ayucolor="light"]]
+        -- vim.cmd[[colorscheme ayu]]
+      end,
+    }
 
     -- Which key
     use {
@@ -87,8 +96,7 @@ function M.setup()
       event = "VimEnter",
       config = function()
         require("nog.plugins.config.lualine").setup()
-      end,
-      requires = { "kyazdani42/nvim-web-devicons" },
+      end
     }
 
     -- IndentLine
@@ -103,9 +111,6 @@ function M.setup()
     -- File Explorer
     use {
       "kyazdani42/nvim-tree.lua",
-      requires = {
-        "kyazdani42/nvim-web-devicons",
-      },
       cmd = { "NvimTreeToggle", "NvimTreeClose" },
       config = function()
         require("nog.plugins.config.nvimtree").setup()
@@ -132,7 +137,7 @@ function M.setup()
     -- Telescope
     use {
       'nvim-telescope/telescope.nvim',
-      requires = { {'nvim-lua/plenary.nvim'}, { "kyazdani42/nvim-web-devicons" } },
+      requires = { {'nvim-lua/plenary.nvim'} },
       config = function()
         require("nog.plugins.config.telescope").setup()
       end
@@ -167,17 +172,20 @@ function M.setup()
         require("nog.plugins.config.lsp").setup()
       end,
     }
+
     use {
       "hrsh7th/nvim-cmp",
       config = function()
         require("nog.plugins.config.cmp").setup()
       end,
     }
+
+    -- vimspector
     use {
-      'goolord/alpha-nvim',
-      config = function ()
-        require'alpha'.setup(require'alpha.themes.dashboard'.config)
-      end
+      "puremourning/vimspector",
+      config = function()
+        require("nog.plugins.config.vimspector").setup()
+      end,
     }
 
     --

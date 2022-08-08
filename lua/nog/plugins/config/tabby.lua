@@ -23,8 +23,8 @@ function M.setup()
   local hl_tabline_fill = util.extract_nvim_hl('TabLineFill')
 
   local function tab_label(tabid, active)
-    local icon_left = active and '' or ''
-    local icon_right = active and '' or ''
+    local icon_left = active and '>' or ''
+    local icon_right = active and '<' or ''
     local name = util.get_tab_name(tabid)
     return string.format(' %s %s %s ', icon_left, name, icon_right)
   end
@@ -34,7 +34,7 @@ function M.setup()
       hl = 'TabLineFill',
       layout = 'tab_only',
       head = {
-        { '  ', hl = { fg = targetcolors.onelight.highlight, bg = targetcolors.lowlight } },
+        { ' $$$ ', hl = { fg = targetcolors.onelight.highlight, bg = targetcolors.lowlight } },
       },
       active_tab = {
         label = function(tabid)

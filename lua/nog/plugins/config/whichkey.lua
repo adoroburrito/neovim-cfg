@@ -78,6 +78,23 @@ function M.setup()
       r = { "<cmd>luafile ~/.config/nvim/init.lua<cr>", "Reload cfg" },
       n = { "<cmd>require('notify')('Notify!')<cr>", "Notify test" },
     },
+    v = {
+      name = "Vimspector",
+      G = { "<cmd>lua require('nog.plugins.config.vimspector').generate_debug_profile()<cr>", "Generate Debug Profile" },
+      I = { "<cmd>VimspectorInstall<cr>", "Install" },
+      U = { "<cmd>VimspectorUpdate<cr>", "Update" },
+      R = { "<cmd>call vimspector#RunToCursor()<cr>", "Run to Cursor" },
+      c = { "<cmd>call vimspector#Continue()<cr>", "Continue" },
+      i = { "<cmd>call vimspector#StepInto()<cr>", "Step Into" },
+      o = { "<cmd>call vimspector#StepOver()<cr>", "Step Over" },
+      s = { "<cmd>call vimspector#Launch()<cr>", "Start" },
+      t = { "<cmd>call vimspector#ToggleBreakpoint()<cr>", "Toggle Breakpoint" },
+      u = { "<cmd>call vimspector#StepOut()<cr>", "Step Out" },
+      S = { "<cmd>call vimspector#Stop()<cr>", "Stop" },
+      r = { "<cmd>call vimspector#Restart()<cr>", "Restart" },
+      x = { "<cmd>VimspectorReset<cr>", "Reset" },
+      H = { "<cmd>lua require('nog.plugins.config.vimspector').toggle_human_mode()<cr>", "Toggle HUMAN mode" },
+    },
 
   }
 
