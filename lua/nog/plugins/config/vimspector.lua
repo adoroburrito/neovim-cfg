@@ -22,6 +22,19 @@ local vimspector_python = [[
 }
 ]]
 
+--
+-- useful package.json task:
+-- >> "inspect": "tsc && node --inspect ./build/index.js",
+--
+-- ^ this will start a node process that is attachable by vimspector using the
+-- vscode-node-debug2 DAP. 
+--
+-- If using typescript, make sure to add this to tsconfig.json:
+-- >> "sourceMap": true
+-- this will make tsc output sourcemaps to the build dir, and vscode-node-debug2
+-- will make vimspector correctly show the equivalent TS code
+--
+-- The below file sample needs to be placed at the root of the project:
 local vimspector_node = [[
 {
   "configurations": {
@@ -34,13 +47,13 @@ local vimspector_node = [[
         }
       },
       "configuration": {
-        "request": "launch",
-        "protocol": "auto",
-        "stopOnEntry": true,
+        "request": "attach",
+        "type": "node",
+        "stopOnEntry": false,
         "console": "integratedTerminal",
-        "program": "${workspaceFolder}/src/index.ts",
-        "outFiles": "${workspaceFolder}/build/**/*.js",
-        "cwd": "${workspaceFolder}"
+        "program": "${workspaceFolder}/build/index.js",
+        "skipFiles": ["node_modules/**/*.js", "<node_internals>/**/*.js"],
+        "processId": "${processId}"
       }
     }
   }
