@@ -188,6 +188,26 @@ function M.setup()
       end,
     }
 
+    -- refactoring coconut oil
+    use {
+      "ThePrimeagen/refactoring.nvim",
+      requires = {
+        {"nvim-lua/plenary.nvim"},
+        {"nvim-treesitter/nvim-treesitter"}
+      },
+      config = function()
+        require('refactoring').setup({})
+      end,
+    }
+
+    -- toggleterm
+    use {
+      "akinsho/toggleterm.nvim",
+      config = function()
+        require("nog.plugins.config.toggleterm").setup()
+      end,
+    }
+
     --
     -- END!
     --

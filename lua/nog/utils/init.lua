@@ -1,39 +1,28 @@
 local notify = require("notify")
-
-_G.dump = function(...)
-  print(vim.inspect(...))
-end
-
-_G.prequire = function(...)
-  local status, lib = pcall(require, ...)
-  if status then
-    return lib
-  end
-  return nil
-end
+notify.setup({
+  background_colour = "#000000",
+  render = "minimal",
+  stages = "slide",
+  fps = 60
+})
 
 local M = {}
 
-function M.t(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-function M.log(msg, hl, name)
-  name = name or "Neovim"
-  hl = hl or "Todo"
-  vim.api.nvim_echo({ { name .. ": ", hl }, { msg } }, true, {})
+function M.base(msg, name, level)
+  local prefix = name and name .. ": " or ""
+  notify(prefix .. msg, level, { title = name })
 end
 
 function M.warn(msg, name)
-  notify(msg, "warn", { title = name })
+  M.base(msg, name, "warn")
 end
 
 function M.error(msg, name)
-  notify(msg, "error", { title = name })
+  M.base(msg, name, "error")
 end
 
 function M.info(msg, name)
-  notify(msg, "info", { title = name })
+  M.base(msg, name, "info")
 end
 
 return M

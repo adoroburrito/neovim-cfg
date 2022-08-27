@@ -10,7 +10,7 @@ function M.setup()
     },
   }
 
-  local opts = {
+  local normalOpts = {
     mode = "n", -- Normal mode
     prefix = "<Leader>",
     buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
@@ -19,7 +19,16 @@ function M.setup()
     nowait = false, -- use `nowait` when creating keymaps
   }
 
-  local mappings = {
+  local visualOpts = {
+    mode = "v", -- Normal mode
+    prefix = "<Leader>",
+    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = false, -- use `nowait` when creating keymaps
+  }
+
+  local normalMappings = {
     ["w"] = { "<cmd>update!<CR>", "Save" },
 		["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 
@@ -34,6 +43,12 @@ function M.setup()
       r = { "<Cmd>source $MYVIMRC<Cr>", "Re-source $MYVIMRC" },
     },
 
+    t = {
+      name = "Terminal",
+      t = { "<Cmd>ToggleTerm direction=float<Cr>", "Toggle terminal" },
+      n = { '<Cmd>TermExec cmd="node"<Cr>', "Open nodejs repl" },
+    },
+
     f = {
       name = "Find (telescope)",
       f = { "<cmd>Telescope git_files<cr>", "Files in CWD" },
@@ -43,7 +58,6 @@ function M.setup()
       c = { "<cmd>Telescope commands<cr>", "Commands" },
       m = { "<cmd>Telescope man_pages<cr>", "Man pages" },
       s = { "<cmd>Telescope lsp_document_symbols<cr>", "(LSP) Document symbols" },
-      g = { "<cmd>Telescope lsp_document_symbols<cr>", "(GIT) Status" },
     },
 
     F = {
@@ -75,6 +89,7 @@ function M.setup()
       name = "Nog utils",
       t = { "<cmd>e ~/temp.md<cr>", "Temp (~/temp.md)" },
       g = { "<cmd>cd %:h | cd `git rev-parse --show-toplevel`<cr><cmd>execute 'NvimTreeOpen' getcwd()<cr>", "Set CWD as this file's git root" },
+      b = { "<cmd>!git blame % > ~/temp-dg.md<cr><cmd>tabnew ~/temp-dg.md<cr>", "Git blame for this file" },
       r = { "<cmd>luafile ~/.config/nvim/init.lua<cr>", "Reload cfg" },
       n = { "<cmd>require('notify')('Notify!')<cr>", "Notify test" },
     },
@@ -98,8 +113,21 @@ function M.setup()
 
   }
 
+  local visualMappings = {
+    r = {
+      name = "Refactor",
+      f = { "<Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>", "Extract Function" },
+      F = { "<Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>", "Extract Function to File" },
+      v = { "<Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>", "Extract Variable" },
+      V = { "<Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>", "Inline Variable" },
+      b = { "<Cmd>lua require('refactoring').refactor('Extract Block')<CR>", "Extract Block" },
+      B = { "<Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>", "Extract Block To File" },
+    },
+  }
+
   whichkey.setup(conf)
-  whichkey.register(mappings, opts)
+  whichkey.register(normalMappings, normalOpts)
+  whichkey.register(visualMappings, visualOpts)
 end
 
 return M

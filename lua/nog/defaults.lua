@@ -69,3 +69,9 @@ vim.cmd [[
 
 vim.opt.guifont = { "FantasqueSansMono Nerd Font Mono", "h12" }
 
+vim.cmd [[
+  set autoread
+  autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+  autocmd FileChangedShellPost *
+    \ lua require('nog.utils').info("Detected file change, reloading...", "Autocmd")
+]]
