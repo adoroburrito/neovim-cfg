@@ -1,7 +1,8 @@
-local M = {}
+local utils = require("nog.utils")
+local lualineLogger = utils.moduleLogger("lualine")
 
 local gruvcolors = require("gruvbox-baby.colors").config()
-function gruvbox_colors()
+local function gruvbox_colors()
   local custom_gruvbox = require("lualine.themes.gruvbox-baby")
 
   custom_gruvbox.normal.b.bg = gruvcolors.dark
@@ -26,11 +27,37 @@ function gruvbox_colors()
 end
 
 local onedarkpallete = require("onedark.palette")
-function onelight_colors()
+local function onelight_colors()
   local custom_onelight = require("lualine.themes.onelight")
+  custom_onelight.normal.c.fg = '#c0c0c0'
 
   return custom_onelight
 end
+
+local function get_cwd()
+  local shouldLog = false
+  local log = utils.getFuncLogger(lualineLogger, "get_cwd", shouldLog)
+
+  local cwd = utils.getCwdShort()
+  local fileCwd = utils.getFileCwdShort()
+
+  log("cwd: " .. cwd .. " | fileCwd: " .. fileCwd)
+
+  if utils.match(fileCwd, cwd) then
+    fileCwd = utils.replace(fileCwd, cwd, ">>")
+  end
+
+  log("cwd2: " .. cwd .. " | fileCwd2: " .. fileCwd)
+
+  -- user in cwd?
+  if fileCwd == ">>" then
+    return '家 ' .. cwd
+  else -- user in folder inside cwd OR outside cwd
+    return '家 ' .. cwd .. ' 宿 ' .. fileCwd
+  end
+end
+
+local M = {}
 
 function M.setup()
   local custom_gruvbox = gruvbox_colors()
@@ -47,31 +74,15 @@ function M.setup()
       lualine_a = {
         "mode",
       },
-      lualine_b = { { "filename", path = 2} },
+      lualine_b = { { "filename", path = 0} },
       lualine_c = {
-        {
-          "lsp_progress",
-          "diagnostics",
-          sources = { "nvim_diagnostic" },
-          sections = { "error", "warn", "info", "hint" },
-          --color_error = gruvcolors.error_red,
-          --color_warn = gruvcolors.bright_yellow,
-          --color_info = gruvcolors.milk,
-          --color_hint = gruvcolors.milk,
-          color_error = onedarkpallete.light.red,
-          color_warn = onedarkpallete.light.yellow,
-          color_info = onedarkpallete.light.bg0,
-          color_hint = onedarkpallete.light.bg0,
-          symbols = { error = "▪", warn = "▴", info = "›", hint = "▸" },
-        },
+        { get_cwd },
       },
       lualine_x = {
-        "branch",
         "encoding",
-        "fileformat",
         "filetype",
       },
-      lualine_y = { "progress" },
+      lualine_y = { "branch" },
       lualine_z = { "location" },
     },
     inactive_sections = {

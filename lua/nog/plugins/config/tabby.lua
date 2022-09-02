@@ -34,7 +34,7 @@ function M.setup()
       hl = 'TabLineFill',
       layout = 'tab_only',
       head = {
-        { ' $$$ ', hl = { fg = targetcolors.onelight.highlight, bg = targetcolors.lowlight } },
+        { ' 心 ', hl = { fg = targetcolors.onelight.highlight, bg = targetcolors.lowlight } },
       },
       active_tab = {
         label = function(tabid)

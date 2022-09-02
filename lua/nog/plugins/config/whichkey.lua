@@ -93,6 +93,12 @@ function M.setup()
       r = { "<cmd>luafile ~/.config/nvim/init.lua<cr>", "Reload cfg" },
       n = { "<cmd>require('notify')('Notify!')<cr>", "Notify test" },
     },
+
+    m = {
+      name = "Nog modules",
+      n = { "<cmd>lua require('nog.modules.notes').open_note()<cr>", "Open today's note" },
+    },
+
     v = {
       name = "Vimspector",
       G = { "<cmd>lua require('nog.plugins.config.vimspector').generate_debug_profile()<cr>", "Generate Debug Profile" },

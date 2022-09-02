@@ -208,6 +208,26 @@ function M.setup()
       end,
     }
 
+    -- java stuff
+    use {
+      "mfussenegger/nvim-jdtls",
+      config = function()
+        require("nog.plugins.config.jdtls").setup()
+      end,
+      ft = 'java'
+    }
+
+    -- sticky function headers
+    use {
+      "nvim-treesitter/nvim-treesitter-context",
+      requires = {
+        {"nvim-treesitter/nvim-treesitter"}
+      },
+      config = function()
+        require("nog.plugins.config.treesitter-context").setup()
+      end,
+    }
+
     --
     -- END!
     --
