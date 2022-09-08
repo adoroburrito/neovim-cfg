@@ -45,13 +45,13 @@ function M.setup()
     --
 
     -- Colorscheme
+    --[[
     use {
       "luisiacc/gruvbox-baby",
       config = function()
         vim.cmd "syntax on"
         vim.g.gruvbox_baby_function_style = "italic"
         vim.g.gruvbox_baby_keyword_style = "bold"
-        -- vim.cmd[[colorscheme gruvbox-baby]]
       end,
     }
 
@@ -76,9 +76,39 @@ function M.setup()
     use {
       "ayu-theme/ayu-vim",
       config = function()
-        vim.cmd[[set termguicolors]]
-        vim.cmd[[let ayucolor="light"]]
-        -- vim.cmd[[colorscheme ayu]]
+      end,
+    }
+    ]]--
+
+    -- catppuccin
+    use {
+      "catppuccin/nvim",
+      config = function()
+        vim.g.catppuccin_flavour = "latte"
+        require("catppuccin").setup({
+          color_overrides = {
+            latte = {
+              base = "#ffffff",
+            }
+          },
+          term_colors = false,
+          dim_inactive = {
+            enabled = false,
+            shade = "dark",
+            percentage = 0.15
+          },
+          integrations = {
+            telescope = true,
+            which_key = true,
+            nvimtree = true,
+            notify = true,
+            aerial = true,
+            hop = true,
+            cmp = true,
+            treesitter = true
+          }
+        })
+        vim.cmd [[colorscheme catppuccin]]
       end,
     }
 
@@ -217,15 +247,30 @@ function M.setup()
       ft = 'java'
     }
 
-    -- sticky function headers
+    -- symbols navigation
     use {
-      "nvim-treesitter/nvim-treesitter-context",
-      requires = {
-        {"nvim-treesitter/nvim-treesitter"}
-      },
+      'stevearc/aerial.nvim',
+      config = function() require('aerial').setup() end
+    }
+
+    -- show registers
+    use "tversteeg/registers.nvim"
+
+    -- hop around (visible characters of) buffer
+    use {
+      'phaazon/hop.nvim',
+      branch = 'v2', -- optional but strongly recommended
       config = function()
-        require("nog.plugins.config.treesitter-context").setup()
-      end,
+        require('hop').setup()
+      end
+    }
+
+    -- peek lines
+    use {
+      'nacro90/numb.nvim',
+      config = function()
+        require('numb').setup()
+      end
     }
 
     --

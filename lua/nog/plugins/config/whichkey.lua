@@ -31,11 +31,13 @@ function M.setup()
   local normalMappings = {
     ["w"] = { "<cmd>update!<CR>", "Save" },
 		["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+		[" "] = { "<cmd>HopWord<cr>", "Explorer" },
 
     b = {
       name = "Buffer",
       c = { "<Cmd>bd!<Cr>", "Close current buffer" },
       D = { "<Cmd>%bd|e#|bd#<Cr>", "Delete all buffers" },
+      s = { "<Cmd>SymbolsOutline<cr>", "Toggle Show Symbols"}
     },
 
     c = {
@@ -51,6 +53,7 @@ function M.setup()
 
     f = {
       name = "Find (telescope)",
+      a = { "<cmd>Telescope aerial<cr>", "Symbols (Aerial)" },
       f = { "<cmd>Telescope git_files<cr>", "Files in CWD" },
       F = { "<cmd>Telescope find_files<cr>", "All Files in CWD" },
       g = { "<cmd>Telescope live_grep<cr>", "Grep file contents in CWD" },

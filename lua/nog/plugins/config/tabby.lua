@@ -3,19 +3,25 @@ local M = {}
 function M.setup()
   local tabby = require "tabby"
   local util = require('tabby.util')
-  local gruvcolors = require('gruvbox-baby.colors').config()
-  local onedarkpallete = require("onedark.palette")
+--  local gruvcolors = require('gruvbox-baby.colors').config()
+--  local onedarkpallete = require("onedark.palette")
+  local latte = require("catppuccin.palettes").get_palette("latte")
   local targetcolors = {
-    gruvbox = {
-      highlight = gruvcolors.light_blue,
-      lowlight = gruvcolors.dark,
-      bright = gruvcolors.bg_light,
-    },
-    onelight = {
-      highlight = onedarkpallete.light.bg_blue,
-      lowlight = onedarkpallete.light.bg_d,
-      bright = onedarkpallete.light.bg0,
-    },
+--    gruvbox = {
+--      highlight = gruvcolors.light_blue,
+--      lowlight = gruvcolors.dark,
+--      bright = gruvcolors.bg_light,
+--    },
+--    onelight = {
+--      highlight = onedarkpallete.light.bg_blue,
+--      lowlight = onedarkpallete.light.bg_d,
+--      bright = onedarkpallete.light.bg0,
+--    },
+      catppuccin = {
+        highlight = "#989aea",
+        lowlight = latte.base,
+        bright = latte.base,
+      }
   }
 
   local hl_tabline = util.extract_nvim_hl('TabLine')
@@ -34,13 +40,13 @@ function M.setup()
       hl = 'TabLineFill',
       layout = 'tab_only',
       head = {
-        { ' 心 ', hl = { fg = targetcolors.onelight.highlight, bg = targetcolors.lowlight } },
+        { ' 心 ', hl = { fg = targetcolors.catppuccin.highlight, bg = targetcolors.catppuccin.lowlight } },
       },
       active_tab = {
         label = function(tabid)
           return {
             tab_label(tabid, true),
-            hl = { fg = targetcolors.onelight.bright, bg = targetcolors.onelight.highlight, style = 'bold' },
+            hl = { fg = targetcolors.catppuccin.bright, bg = targetcolors.catppuccin.highlight, style = 'bold' },
           }
         end,
         left_sep = { '', hl = { fg = hl_tabline_sel.bg, bg = hl_tabline_fill.bg } },
@@ -50,7 +56,7 @@ function M.setup()
         label = function(tabid)
           return {
             tab_label(tabid, false),
-            hl = { fg = targetcolors.onelight.lowlight, bg = targetcolors.onelight.bright, style = nil },
+            hl = { fg = targetcolors.catppuccin.lowlight, bg = targetcolors.catppuccin.bright, style = nil },
           }
         end,
         left_sep = { '', hl = { fg = hl_tabline.bg, bg = hl_tabline_fill.bg } },

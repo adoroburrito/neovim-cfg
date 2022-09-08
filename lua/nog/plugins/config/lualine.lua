@@ -1,38 +1,38 @@
 local utils = require("nog.utils")
 local lualineLogger = utils.moduleLogger("lualine")
 
-local gruvcolors = require("gruvbox-baby.colors").config()
-local function gruvbox_colors()
-  local custom_gruvbox = require("lualine.themes.gruvbox-baby")
-
-  custom_gruvbox.normal.b.bg = gruvcolors.dark
-  custom_gruvbox.normal.c.bg = gruvcolors.dark
-
-  custom_gruvbox.insert.b.bg = gruvcolors.dark
-  custom_gruvbox.insert.c.bg = gruvcolors.dark
-
-  custom_gruvbox.visual.b.bg = gruvcolors.dark
-  custom_gruvbox.visual.c.bg = gruvcolors.dark
-
-  custom_gruvbox.replace.b.bg = gruvcolors.dark
-  custom_gruvbox.replace.c.bg = gruvcolors.dark
-
-  custom_gruvbox.command.b.bg = gruvcolors.dark
-  custom_gruvbox.command.c.bg = gruvcolors.dark
-
-  custom_gruvbox.inactive.b.bg = gruvcolors.dark
-  custom_gruvbox.inactive.c.bg = gruvcolors.dark
-
-  return custom_gruvbox
-end
-
-local onedarkpallete = require("onedark.palette")
-local function onelight_colors()
-  local custom_onelight = require("lualine.themes.onelight")
-  custom_onelight.normal.c.fg = '#c0c0c0'
-
-  return custom_onelight
-end
+--local gruvcolors = require("gruvbox-baby.colors").config()
+--local function gruvbox_colors()
+--  local custom_gruvbox = require("lualine.themes.gruvbox-baby")
+--
+--  custom_gruvbox.normal.b.bg = gruvcolors.dark
+--  custom_gruvbox.normal.c.bg = gruvcolors.dark
+--
+--  custom_gruvbox.insert.b.bg = gruvcolors.dark
+--  custom_gruvbox.insert.c.bg = gruvcolors.dark
+--
+--  custom_gruvbox.visual.b.bg = gruvcolors.dark
+--  custom_gruvbox.visual.c.bg = gruvcolors.dark
+--
+--  custom_gruvbox.replace.b.bg = gruvcolors.dark
+--  custom_gruvbox.replace.c.bg = gruvcolors.dark
+--
+--  custom_gruvbox.command.b.bg = gruvcolors.dark
+--  custom_gruvbox.command.c.bg = gruvcolors.dark
+--
+--  custom_gruvbox.inactive.b.bg = gruvcolors.dark
+--  custom_gruvbox.inactive.c.bg = gruvcolors.dark
+--
+--  return custom_gruvbox
+--end
+--
+--local onedarkpallete = require("onedark.palette")
+--local function onelight_colors()
+--  local custom_onelight = require("lualine.themes.onelight")
+--  custom_onelight.normal.c.fg = '#c0c0c0'
+--
+--  return custom_onelight
+--end
 
 local function get_cwd()
   local shouldLog = false
@@ -60,12 +60,12 @@ end
 local M = {}
 
 function M.setup()
-  local custom_gruvbox = gruvbox_colors()
-  local custom_onelight = onelight_colors()
+--  local custom_gruvbox = gruvbox_colors()
+--  local custom_onelight = onelight_colors()
 
   require("lualine").setup {
     options = {
-      theme = custom_onelight,
+      theme = "catppuccin",
       component_separators = { "│", "│" },
       section_separators = { "", "" },
       globalstatus = true,

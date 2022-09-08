@@ -37,6 +37,9 @@ local function on_attach(client, bufnr)
 
   -- Configure key mappings
   require("nog.plugins.config.lsp.keymaps").setup(client, bufnr)
+
+  -- Aerial
+  require("aerial").on_attach(client, bufnr)
 end
 
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
