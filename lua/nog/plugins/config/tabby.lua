@@ -19,7 +19,7 @@ function M.setup()
 --    },
       catppuccin = {
         highlight = "#989aea",
-        lowlight = latte.base,
+        lowlight = latte.crust,
         bright = latte.base,
       }
   }

@@ -37,11 +37,11 @@ opt.scrolloff = 10 -- padding between cursor and top/bottom of window
 wo.wrap = false -- don't wrap
 opt.list = true -- show hidden chars
 opt.listchars = { -- overwrite hidden chars look
-  eol = "↴",
-  nbsp = "⋅",
-  trail = "⋅",
-  space = "⋅",
-  tab = "├─",
+  eol = "↵",
+  nbsp = "•",
+  trail = "•",
+  space = "•",
+  tab = " ──",
   extends = "»",
   precedes = "«",
 }

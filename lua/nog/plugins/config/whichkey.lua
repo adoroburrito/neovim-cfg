@@ -5,8 +5,8 @@ function M.setup()
 
   local conf = {
     window = {
-      border = "single", -- none, single, double, shadow
-      position = "bottom", -- bottom, top
+      border = "shadow", -- none, single, double, shadow
+      position = "top", -- bottom, top
     },
   }
 
@@ -39,6 +39,11 @@ function M.setup()
       D = { "<Cmd>%bd|e#|bd#<Cr>", "Delete all buffers" },
       s = { "<Cmd>SymbolsOutline<cr>", "Toggle Show Symbols"}
     },
+    
+    r = {
+      name = "Random",
+      m = { "<Cmd>MarkdownPreviewToggle<Cr>", "Markdown Preview" }
+    },
 
     c = {
       name = "Config",
@@ -47,7 +52,7 @@ function M.setup()
 
     t = {
       name = "Terminal",
-      t = { "<Cmd>ToggleTerm direction=float<Cr>", "Toggle terminal" },
+      t = { "<Cmd>ToggleTerm<Cr>", "Toggle terminal" },
       n = { '<Cmd>TermExec cmd="node"<Cr>', "Open nodejs repl" },
     },
 
@@ -70,6 +75,7 @@ function M.setup()
       d = { "<cmd>cd ~/Downloads<cr><cmd>NvimTreeOpen ~/Downloads/<cr>", "Downloads folder" },
       h = { "<cmd>cd ~/<cr><cmd>NvimTreeOpen ~/<cr>", "Home folder" },
       w = { "<cmd>cd ~/work<cr><cmd>NvimTreeOpen ~/work<cr>", "Work folder" },
+      n = { "<cmd>cd ~/notes<cr><cmd>NvimTreeOpen ~/notes<cr>", "Notes folder" },
     },
 
     q = {
@@ -100,6 +106,7 @@ function M.setup()
     m = {
       name = "Nog modules",
       n = { "<cmd>lua require('nog.modules.notes').open_note()<cr>", "Open today's note" },
+      N = { "<cmd>lua require('nog.modules.notes').find_notes()<cr>", "Find notes" },
     },
 
     v = {

@@ -273,6 +273,21 @@ function M.setup()
       end
     }
 
+    -- markdown syntax highlighting
+    use {
+      'preservim/vim-markdown',
+      config = function()
+        vim.cmd [[set conceallevel=2]]
+        vim.cmd [[let g:vim_markdown_folding_disabled = 1]]
+      end
+    }
+
+    -- preview markdown + mermaidjs
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+    })
+
     --
     -- END!
     --

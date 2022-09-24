@@ -12,6 +12,7 @@ end
 
 function M.setup()
   require("toggleterm").setup{
+    direction = "float",
     hide_numbers = true, -- hide the number column in toggleterm buffers
     auto_scroll = true, -- automatically scroll to the bottom on terminal output
     -- This field is only relevant if direction is set to 'float'
