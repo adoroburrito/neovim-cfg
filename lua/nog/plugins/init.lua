@@ -285,8 +285,25 @@ function M.setup()
     -- preview markdown + mermaidjs
     use({
         "iamcco/markdown-preview.nvim",
-        run = function() vim.fn["mkdp#util#install"]() end,
+        run = function() 
+          vim.cmd [[let g:mkdp_refresh_slow = 0]]
+          vim.cmd [[let g:mkdp_preview_options.disable_sync_scroll = !g:mkdp_preview_options.disable_sync_scroll]]
+          vim.fn["mkdp#util#install"]()
+        end,
     })
+
+    -- review github prs
+    use {
+      'pwntester/octo.nvim',
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'nvim-telescope/telescope.nvim',
+        'kyazdani42/nvim-web-devicons',
+      },
+      config = function ()
+        require"octo".setup()
+      end
+    }
 
     --
     -- END!
