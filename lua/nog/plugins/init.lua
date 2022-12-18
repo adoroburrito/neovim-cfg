@@ -305,6 +305,9 @@ function M.setup()
       end
     }
 
+    -- editor config
+    use 'gpanders/editorconfig.nvim'
+
     --
     -- END!
     --
