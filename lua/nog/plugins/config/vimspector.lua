@@ -83,9 +83,9 @@ function M.generate_debug_profile()
       table.insert(lines, s)
     end
     vim.api.nvim_buf_set_lines(bufNew, 0, -1, false, lines)
-  elseif  ft == "javascript" then
+  elseif  (ft == "javascript" or ft == "typescript") then
     -- Get node path
-    local node_path = "/home/nog/.nvm/versions/node/v18.7.0/bin/node"
+    local node_path = vim.fn.system('which node'):gsub("^%s*(.-)%s*$", "%1")
     local debugProfile = string.format(vimspector_node, node_path)
 
     -- Generate debug profile in a new window
