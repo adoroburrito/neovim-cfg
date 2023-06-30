@@ -5,11 +5,7 @@ local servers = {
   jsonls = {},
   pyright = {},
   rust_analyzer = {},
-  sumneko_lua = {
-    Lua = {
-      diagnostics = { globals = {'vim'} }
-    }
-  },
+  lua_ls = {},
   tsserver = {},
   vimls = {},
   omnisharp = {},
